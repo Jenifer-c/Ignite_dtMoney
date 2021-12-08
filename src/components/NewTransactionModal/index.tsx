@@ -1,13 +1,16 @@
-import { Container, RadioBox, TransactionTypeContainer } from "./styles";
+import { Container, 
+         RadioBox, 
+         TransactionTypeContainer 
+       } from "./styles";
 
 import closeImg   from '../../assets/close.svg';
 import incomeImg  from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 
-import { FormEvent, useContext, useState } from "react";
-import Modal                               from "react-modal";
+import { FormEvent, useState } from "react";
+import Modal                   from "react-modal";
 
-import { TransactionsContext } from "../../Contexts/TransactionsContext";
+import { useTransactions     } from "../../hooks/useTransactions";
 
 
 
@@ -16,8 +19,8 @@ type NewTransactionModalPropsType = {
     onRequestClose : () => void
 }
 
-export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionModalPropsType) {
-    const {createTransaction} = useContext(TransactionsContext)
+export function NewTransactionModal( { isOpen, onRequestClose } : NewTransactionModalPropsType ) {
+    const { createTransaction       } = useTransactions()
 
     const [ type,           setType ] = useState('deposit');
     const [ title,         setTitle ] = useState('');
@@ -50,10 +53,10 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
             className        = "react-modal-content"
         >
             <button type      = "button"
-                    onClick   = {onRequestClose}
+                    onClick   = { onRequestClose }
                     className = "react-modal-close"
             >
-                <img src = {closeImg} alt = "Fechar Modal" />
+                <img src = { closeImg } alt = "Fechar Modal" />
             </button>
             
             <Container onSubmit = { handleCreateNewTransaction } >
